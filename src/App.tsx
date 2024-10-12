@@ -2,16 +2,16 @@
 import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './routes'
+import { AppContextProvider } from './context/appContext'
 
 function App() {
-  //const [count, setCount] = useState(0)
 
   return (
-    // <AppContextProvider>
+    <AppContextProvider>
       <BrowserRouter>
         <AppRoutes/>
       </BrowserRouter>
-    //{/* </AppContextProvider> */}
+    </AppContextProvider> 
   )
 }
 
