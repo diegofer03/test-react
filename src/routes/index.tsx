@@ -5,7 +5,7 @@ import Dashboard from '../containers/dashboard'
 
 const AppRoutes = () => {
   const routes = useRoutes([
-    { path: '/sigin', element: <SignIn /> },
+    { path: '/sigin', element: <SignIn />},
     { path: '/dashboard', element: <ProtectedRoute> <Dashboard/> </ProtectedRoute> },
     { path:"/*", element:<Navigate to="/sigin" />},
   ])

@@ -5,7 +5,9 @@ interface SignInFormComponentProps {
     emailError: boolean
     emailErrorMessage: string
     passwordError: boolean
-    passwordErrorMessage: string
+    passwordErrorMessage: string,
+    showPassword: boolean
+    handleClickShowPassword: () => void
 }
 
 interface AppContextType {

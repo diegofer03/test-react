@@ -5,13 +5,17 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-// import ForgotPassword from './ForgotPassword';
 import { SitemarkIcon } from './styles';
 import AppTheme from '../../shared/shared-theme/AppTheme';
-import ColorModeSelect from '../../shared/shared-theme/ColorModeSelect';
 import SignInFormComponent from '../../components/signInForm';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../hooks/useProviderApp';
+// import ColorModeSelect from '../../shared/shared-theme/ColorModeSelect';
+
+const VALID_USER = {
+  email: 'prologin@prologin.com',
+  password: 'ProLogin123456'
+}
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -55,31 +59,42 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
-  const { login } = useApp()!;
+  const navigate = useNavigate();
+  const { login, saveUser, getData } = useApp()!;
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  // const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+  React.useEffect(()=>{
+    getData()
+    if (login) {
+      navigate("/dashboard");
+    }
+  },[login])
 
-  // // const handleClose = () => {
-  // //   setOpen(false);
-  // // };
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (emailError || passwordError) {
-      event.preventDefault();
-      return;
-    }
+    event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    if (data.get('email') !== VALID_USER.email || data.get('password') !== VALID_USER.password) {
+      setEmailError(true);
+      setEmailErrorMessage('Invalid Email. Please review email');
+      setPasswordError(true);
+      setPasswordErrorMessage('Invalid Password. Please review password');
+    }
+    else {
+      saveUser(data.get('email'))
+      navigate("/dashboard")
+    }
+
   };
 
   const validateInputs = () => {
@@ -109,15 +124,13 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     return isValid;
   };
 
-  if (login) {
-    return <Navigate to='/dashboard' replace />;
-  }
+  if(login) return null
 
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
-        <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
+        {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
         <Card variant="outlined">
           <SitemarkIcon />
           <Typography
@@ -128,7 +141,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             ProLogin
           </Typography>
           
-          <SignInFormComponent handleSubmit={handleSubmit} validateInputs={validateInputs}
+          <SignInFormComponent showPassword={showPassword} handleClickShowPassword={handleClickShowPassword} handleSubmit={handleSubmit} validateInputs={validateInputs}
             emailError={emailError} emailErrorMessage={emailErrorMessage} passwordError={passwordError} 
             passwordErrorMessage={passwordErrorMessage}/> 
         </Card>

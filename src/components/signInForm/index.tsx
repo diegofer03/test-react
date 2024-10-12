@@ -1,9 +1,10 @@
-import { Box, Button, FormControl, FormLabel, TextField } from '@mui/material'
+import { Box, Button, FormControl, FormLabel, IconButton, InputAdornment, TextField } from '@mui/material'
 
 import { SignInFormComponentProps } from '../../common/types'
+import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material'
 
-export default function SignInFormComponent({handleSubmit, validateInputs,
-    emailError, emailErrorMessage, passwordError, passwordErrorMessage} : SignInFormComponentProps) {
+export default function SignInFormComponent({handleSubmit, validateInputs, showPassword,
+    emailError, emailErrorMessage, passwordError, passwordErrorMessage, handleClickShowPassword } : SignInFormComponentProps) {
         
     return (
         <Box
@@ -48,7 +49,7 @@ export default function SignInFormComponent({handleSubmit, validateInputs,
                 helperText={passwordErrorMessage}
                 name="password"
                 placeholder="••••••"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="current-password"
                 autoFocus
@@ -56,6 +57,21 @@ export default function SignInFormComponent({handleSubmit, validateInputs,
                 fullWidth
                 variant="outlined"
                 color={passwordError ? 'error' : 'primary'}
+                slotProps={{
+                    input:{
+                        endAdornment: (
+                            <InputAdornment position="end" sx={{background:'unset'}}>
+                              <IconButton size='small'
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                sx={{border:'none', borderRadius: '50%'}}
+                              >
+                                {showPassword ? <VisibilityOutlined /> : <VisibilityOffOutlined />}
+                              </IconButton>
+                            </InputAdornment>
+                          )
+                    }
+                  }}
                 />
             </FormControl>
             <Box display='flex' justifyContent='end'>

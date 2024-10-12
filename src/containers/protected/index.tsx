@@ -2,13 +2,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Navigate, Outlet } from 'react-router-dom';
 import { useApp } from '../../hooks/useProviderApp';
+import { useEffect } from 'react';
 
 interface ProtectedRouteProps {
   redirectPath?: string;
 }
 
 const ProtectedRoute = (props:any) => {
-  const { login } = useApp()!;
+  const { login, getData } = useApp()!;
+
+  useEffect(()=>{
+    getData()
+  },[])
 
   if (!login) {
     return <Navigate to='/login' replace />;
