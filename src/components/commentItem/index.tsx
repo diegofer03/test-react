@@ -23,14 +23,26 @@ const [open, setOpen] = useState(false);
         </IconButton>
         }
     >
-        <Box display='flex' width='100%' justifyContent='space-between'>
-            <ListItemText 
+        <Box display='flex' aria-label='box' sx={{
+          flexDirection: {
+            xs: 'column',  
+            sm: 'row',  
+            md: 'row',     
+            lg: 'row',     
+          },
+          }} width='100%' justifyContent='space-between'>
+            <ListItemText sx={{wordWrap:'break-word'}}
             primary={comment.id}
             />
-            <ListItemText sx={{ display:'flex', justifyContent:'center', width:'30%', wordWrap:'break-word'}}
+            <ListItemText sx={{ display:'flex', justifyContent:'center', width:{
+                xs: '60%',  
+                sm: '60%',  
+                md: '33%',     
+                lg: '33%',     
+              }, wordWrap:'break-word'}}
             primary={comment.name}
             />
-            <ListItemText 
+            <ListItemText sx={{wordWrap:'break-word'}}
             primary={comment.email}
             />
         </Box>
