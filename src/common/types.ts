@@ -38,4 +38,10 @@ interface CommentProps{
     comment: Comment
 }
 
-export type { SignInFormComponentProps, AppContextType, CommentProps }
+interface DialogProps{
+    comment: Comment,
+    handleClose: () => void
+    open: boolean
+}
+
+export type { SignInFormComponentProps, AppContextType, CommentProps, DialogProps }

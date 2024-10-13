@@ -1,15 +1,24 @@
 import { Box, IconButton, ListItem, ListItemText } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import React from 'react'
+import { useState } from 'react'
 import { CommentProps } from '../../common/types';
+import CommentDialogComponent from '../commentDialog';
 
 export default function CommentItemComponent({comment}: CommentProps) {
+const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <ListItem
         sx={{padding: '10px ', marginY:'10px', border:'1px solid gray', display:'flex', 
             justifyContent: 'space-evenly', borderRadius:'20px'}}
         secondaryAction={
-        <IconButton edge="end" aria-label="delete" sx={{background:'unset'}} size='large'>
+        <IconButton edge="end" aria-label="delete" onClick={handleClickOpen} sx={{background:'unset'}} size='large'>
             <VisibilityIcon />
         </IconButton>
         }
@@ -25,6 +34,7 @@ export default function CommentItemComponent({comment}: CommentProps) {
             primary={comment.email}
             />
         </Box>
+        <CommentDialogComponent comment={comment} open={open} handleClose={handleClose} />
     </ListItem>
   )
 }

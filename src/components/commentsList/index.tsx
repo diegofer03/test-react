@@ -2,7 +2,7 @@
 import { Box, List } from "@mui/material";
 import { useFetch } from "../../hooks/useFetch";
 import { endPoints } from "../../services/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CommentItemComponent from "../commentItem";
 
 const PRODUCT_LIMIT = 15
@@ -12,22 +12,39 @@ export default function CommentsListComponent() {
   const [currPage, setCurrPage] = useState(PRODUCT_LIMIT)
   const [comments, setComments] = useState<Array<any> | null>([])
   const response = useFetch(endPoints.comments.getComments(currPage, PRODUCT_OFFSET))
+  const listInnerRef = useRef(null)
   
   useEffect(() => {
     if(response){
-      const aux = response.splice(0, 15)
-      console.log(aux)
-      console.log(response)
-      setComments(aux)
+      if(response.length > PRODUCT_LIMIT){
+        const aux = response.splice(0, 15)
+        if(comments)
+          setComments([...comments , ...aux])
+        else setComments([...aux])
+      }else{
+        const aux = response.splice(0, response.length)
+        if(comments)
+          setComments([...comments , ...aux])
+        else setComments([...aux])
+      }
     }
-  }, [response])
+  }, [response, currPage])
+
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current
+      if (scrollTop + clientHeight >= scrollHeight) {
+        setCurrPage(currPage + PRODUCT_LIMIT)
+      }
+    }
+  }
   return (
    
-    <Box  sx={{ height:'75vh', margin:'15px', overflowX:'auto'}} >
+    <Box  sx={{ height:'75vh', margin:'15px', overflowX:'auto'}} ref={listInnerRef} onScroll={onScroll}>
       <Box sx={{ display:'flex', justifyContent:'center',}}>
         <List sx={{ width:'80%',  overflow:'hidden'}}>
-          {comments?.map((comment) => (
-            <CommentItemComponent key={comment.id} comment={comment}/>
+          {comments?.map((comment, index) => (
+            <CommentItemComponent key={index} comment={comment}/>
           ))
           }
         </List>
