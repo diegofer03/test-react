@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CssBaseline, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import CommentsListComponent from "../../components/commentsList";
 import AppTheme from "../../shared/shared-theme/AppTheme";
 import styled from "styled-components";
 import NavbarComponent from "../../components/navbar";
 
-const DashboardContainer = styled(Stack)(({ theme }) => ({
+const DashboardContainer = styled(Stack)(() => ({
   maxHeight: '800px',
   '&::before': {
     content: '""',

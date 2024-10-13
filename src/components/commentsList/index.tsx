@@ -16,6 +16,13 @@ export default function CommentsListComponent() {
   
   useEffect(() => {
     if(response){
+      const aux = response.splice(0, 15)
+      setComments([...aux])
+    }
+  }, [response])
+
+  const addData = () => {
+    if(response){
       if(response.length > PRODUCT_LIMIT){
         const aux = response.splice(0, 15)
         if(comments)
@@ -28,13 +35,14 @@ export default function CommentsListComponent() {
         else setComments([...aux])
       }
     }
-  }, [response, currPage])
+  }
 
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current
       if (scrollTop + clientHeight >= scrollHeight) {
         setCurrPage(currPage + PRODUCT_LIMIT)
+        addData()
       }
     }
   }
@@ -42,7 +50,7 @@ export default function CommentsListComponent() {
    
     <Box  sx={{ height:'75vh', margin:'15px', overflowX:'auto'}} ref={listInnerRef} onScroll={onScroll}>
       <Box sx={{ display:'flex', justifyContent:'center',}}>
-        <List sx={{ width:'80%',  overflow:'hidden'}}>
+        <List sx={{ width:'80%',  overflow:'hidden'}} aria-label="listComment">
           {comments?.map((comment, index) => (
             <CommentItemComponent key={index} comment={comment}/>
           ))

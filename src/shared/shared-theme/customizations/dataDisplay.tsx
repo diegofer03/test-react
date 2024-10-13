@@ -1,3 +1,4 @@
+
 import { Theme, alpha, Components } from '@mui/material/styles';
 import { svgIconClasses } from '@mui/material/SvgIcon';
 import { typographyClasses } from '@mui/material/Typography';
@@ -6,7 +7,6 @@ import { chipClasses } from '@mui/material/Chip';
 import { iconButtonClasses } from '@mui/material/IconButton';
 import { gray, red, green } from '../themePrimitives';
 
-/* eslint-disable import/prefer-default-export */
 export const dataDisplayCustomizations: Components<Theme> = {
   MuiList: {
     styleOverrides: {
@@ -24,7 +24,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
         [`& .${svgIconClasses.root}`]: {
           width: '1rem',
           height: '1rem',
-          color: (theme.vars || theme).palette.text.secondary,
+          // color: (theme.vars || theme).palette.text.secondary,
         },
         [`& .${typographyClasses.root}`]: {
           fontWeight: 500,
@@ -33,13 +33,13 @@ export const dataDisplayCustomizations: Components<Theme> = {
           display: 'flex',
           gap: 8,
           padding: '2px 8px',
-          borderRadius: (theme.vars || theme).shape.borderRadius,
+          // borderRadius: (theme.vars || theme).shape.borderRadius,
           // opacity: 0.7,
           '&.Mui-selected': {
             opacity: 1,
             backgroundColor: alpha(theme.palette.action.selected, 0.3),
             [`& .${svgIconClasses.root}`]: {
-              color: (theme.vars || theme).palette.text.primary,
+              // color: (theme.vars || theme).palette.text.primary,
             },
             '&:focus-visible': {
               backgroundColor: alpha(theme.palette.action.selected, 0.3),
