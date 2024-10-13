@@ -6,7 +6,7 @@ import styled from "styled-components";
 import NavbarComponent from "../../components/navbar";
 
 const DashboardContainer = styled(Stack)(({ theme }) => ({
-  minHeight: '100%',
+  maxHeight: '800px',
   '&::before': {
     content: '""',
     display: 'block',
@@ -22,7 +22,7 @@ const DashboardContainer = styled(Stack)(({ theme }) => ({
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (
     <AppTheme {...props}>
-        <CssBaseline enableColorScheme />
+        {/* <CssBaseline enableColorScheme /> */}
         <DashboardContainer direction="column" justifyContent="space-between">
           <NavbarComponent/>
           <CommentsListComponent/>

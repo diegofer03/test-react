@@ -26,4 +26,16 @@ interface AppContextType {
     logIn: () => void
 }
 
-export type { SignInFormComponentProps, AppContextType }
+interface Comment {
+    postId: number;
+    id:     number;
+    name:   string;
+    email:  string;
+    body:   string;
+}
+
+interface CommentProps{
+    comment: Comment
+}
+
+export type { SignInFormComponentProps, AppContextType, CommentProps }

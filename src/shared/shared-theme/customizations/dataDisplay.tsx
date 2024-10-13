@@ -34,7 +34,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
           gap: 8,
           padding: '2px 8px',
           borderRadius: (theme.vars || theme).shape.borderRadius,
-          opacity: 0.7,
+          // opacity: 0.7,
           '&.Mui-selected': {
             opacity: 1,
             backgroundColor: alpha(theme.palette.action.selected, 0.3),
@@ -211,23 +211,23 @@ export const dataDisplayCustomizations: Components<Theme> = {
       },
     },
   },
-  MuiIcon: {
-    defaultProps: {
-      fontSize: 'small',
-    },
-    styleOverrides: {
-      root: {
-        variants: [
-          {
-            props: {
-              fontSize: 'small',
-            },
-            style: {
-              fontSize: '1rem',
-            },
-          },
-        ],
-      },
-    },
-  },
+  // MuiIcon: {
+  //   defaultProps: {
+  //     fontSize: 'small',
+  //   },
+  //   styleOverrides: {
+  //     root: {
+  //       variants: [
+  //         {
+  //           props: {
+  //             fontSize: 'small',
+  //           },
+  //           style: {
+  //             fontSize: '1rem',
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   },
+  // },
 };
