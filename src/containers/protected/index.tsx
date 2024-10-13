@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useApp } from '../../hooks/useProviderApp';
 import { useEffect } from 'react';
 
-interface ProtectedRouteProps {
-  redirectPath?: string;
-}
 
 const ProtectedRoute = (props:any) => {
   const { login, getData } = useApp()!;

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { createTheme, alpha, PaletteMode, Shadows } from '@mui/material/styles';
 
 declare module '@mui/material/Paper' {
@@ -394,6 +396,5 @@ export const shape = {
   borderRadius: 8,
 };
 
-// @ts-ignore
-const defaultShadows: Shadows = ['var(--mui-palette-baseShadow)', ...defaultTheme.shadows.slice(1)];
+const defaultShadows: any = ['none', 'var(--mui-palette-baseShadow)', ...defaultTheme.shadows.slice(1)];
 export const shadows = defaultShadows;

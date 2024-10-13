@@ -16,6 +16,13 @@ export default function CommentsListComponent() {
   
   useEffect(() => {
     if(response){
+      const aux = response.splice(0, 15)
+      setComments([...aux])
+    }
+  }, [response])
+
+  const addData = () => {
+    if(response){
       if(response.length > PRODUCT_LIMIT){
         const aux = response.splice(0, 15)
         if(comments)
@@ -28,13 +35,14 @@ export default function CommentsListComponent() {
         else setComments([...aux])
       }
     }
-  }, [response, currPage])
+  }
 
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current
       if (scrollTop + clientHeight >= scrollHeight) {
         setCurrPage(currPage + PRODUCT_LIMIT)
+        addData()
       }
     }
   }
