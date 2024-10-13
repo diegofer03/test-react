@@ -30,7 +30,6 @@ export default function SignInFormComponent({handleSubmit, validateInputs, showP
                 type="email"
                 name="email"
                 placeholder="your@email.com"
-                autoComplete="email"
                 autoFocus
                 required
                 fullWidth

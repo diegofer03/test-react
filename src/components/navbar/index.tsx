@@ -20,6 +20,5 @@ export default function NavbarComponent() {
         <Button color="inherit" onClick={handleLogout}>Logout</Button>
     </Toolbar>
     </AppBar>
-    
   )
 }

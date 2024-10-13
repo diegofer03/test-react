@@ -50,7 +50,7 @@ export default function CommentsListComponent() {
    
     <Box  sx={{ height:'75vh', margin:'15px', overflowX:'auto'}} ref={listInnerRef} onScroll={onScroll}>
       <Box sx={{ display:'flex', justifyContent:'center',}}>
-        <List sx={{ width:'80%',  overflow:'hidden'}}>
+        <List sx={{ width:'80%',  overflow:'hidden'}} aria-label="listComment">
           {comments?.map((comment, index) => (
             <CommentItemComponent key={index} comment={comment}/>
           ))
